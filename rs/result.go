@@ -49,6 +49,11 @@ func Opt[T any](val T, ok bool) Result[T] {
 	return None[T]()
 }
 
+func Cast[T any](x any) Result[T] {
+	val, ok := x.(T)
+	return Opt(val, ok)
+}
+
 func OK[T any](val T) Result[T] { return Result[T]{val: val, err: okFlag{}} }
 func None[T any]() Result[T]    { return Err[T](ErrUnset) }
 func Err[T any](err error) Result[T] {
