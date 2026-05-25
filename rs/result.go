@@ -64,6 +64,7 @@ func Err[T any](err error) Result[T] {
 }
 
 func (t Result[T]) Unwrap() (T, error) { return t.Val(), t.Err() }
+func (t Result[T]) Take() (T, bool)    { return t.Val(), t.OK() }
 func (t Result[T]) Simple() any        { return cmp.Or[any](t.Err(), t.val) }
 
 func (t Result[T]) Val() T { return t.val }
